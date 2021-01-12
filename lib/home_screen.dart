@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import 'api_services.dart';
+import 'package:getx/guest_screen.dart';
+import 'package:getx/patient_screen.dart';
+import 'package:getx/staff_screen.dart';
+import 'package:getx/student_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,64 +10,173 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController visitController = TextEditingController();
+
+PageController pageController;
+
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    pageController=PageController(initialPage: 0);
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Post Method Example ",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: phoneNumberController,
-              keyboardType: TextInputType.number,
-              autofocus: false,
-              decoration: InputDecoration(
-                hintText: "Enter Phone Number",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                    borderSide: BorderSide(
-                      color: Colors.black45,
-                    ),),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black45),
-                  borderRadius: BorderRadius.circular(5.0),
+    // backgroundColor: Colors.white70,
+      appBar: AppBar(
+        backgroundColor: Colors.white70,
+        centerTitle: true,
+        elevation: 0,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30),
+          child: Text("Select User Type"),
+        ),
+
+      ),
+      body:Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InkWell(
+                onTap: ()
+                {
+                  pageController.jumpToPage(0);
+                },
+                child: Container(
+                  width: 80,
+                  height: 70,
+                  margin: EdgeInsets.symmetric(vertical: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.blue,
+                          offset: Offset(.5, .5),
+                          blurRadius: 1)
+                    ],
+                  ),
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.supervised_user_circle),
+                      SizedBox(height: 5,),
+                      Text("Student"),
+                    ],
+                  ),
                 ),
               ),
+              InkWell(
+                onTap: ()
+                {
+                  pageController.jumpToPage(1);
+                },
+                child: Container(
+                  width: 80,
+                  height: 70,
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.symmetric(vertical: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.blue,
+                          offset: Offset(.5, .5),
+                          blurRadius: 1)
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.ac_unit),
+                      Text("Staff"),
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: ()
+                {
+                  pageController.jumpToPage(2);
+                },
+                child: Container(
+                  width: 80,
+                  height: 70,
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.ac_unit),
+                      Text("Guest"),
+                    ],
+                  ),
+                  margin: EdgeInsets.symmetric(vertical: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.blue,
+                          offset: Offset(.5, .5),
+                          blurRadius: 1)
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: ()
+                {
+                  pageController.jumpToPage(3);
+                },
+                child: Container(
+                  width: 80,
+                  height: 70,
+                  margin: EdgeInsets.symmetric(vertical: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.blue,
+                          offset: Offset(.5, .5),
+                          blurRadius: 1)
+                    ],
+                  ),
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.ac_unit),
+                      Text("Patient"),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Flexible(
+            flex: 1,
+            child: PageView(
+              //primary: false,
+             // shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+              controller: pageController,
+              children: [
+                // Text("Hi"),
+                // Text("Hi"),
+                // Text("Hi"),
+                // Text("Hi"),
+              StudentScreen(),
+                StaffScreen(),
+                GuestScreen(),
+                PatientSceen(),
+              ],
             ),
-            SizedBox(
-              height: 20,
-            ),
-            FlatButton(
-              color: Colors.green,
-              onPressed: () {
-
-                // print("name:${phoneNumberController.text} ");
-
-                //  phoneNumberController.clear();
-                $apiServices.requestOtpToLogin(phoneNumberController.text);
-                phoneNumberController.clear();
-              },
-              child: Text("GetOtp"),
-            ),
-          ],
-        ),
-      ),
+          )
+        ],
+      )
     );
   }
 }
