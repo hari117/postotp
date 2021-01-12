@@ -93,7 +93,7 @@ class _StaffScreenState extends State<StaffScreen> {
                     height: 40,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
-                    onPressed: () {
+                    onPressed: () async{
                       if(srmIdController.text.isEmpty && staffNameController.text.isEmpty && departmentController.text.isEmpty)
                       {
                         Get.snackbar(" Please Fill All Details", "",
@@ -105,13 +105,16 @@ class _StaffScreenState extends State<StaffScreen> {
                       }
                       else
                       {
-                        $apiServices.registerService(
+                      await $apiServices.registerService(
                           // srmIdController.text, nameController.text,
                           // departmentController.text,0);
                             srmId: srmIdController.text,
                             name: staffNameController.text,
                             department: departmentController.text,
                             token: 1);
+                        srmIdController.clear();
+                        staffNameController.clear();
+                        departmentController.clear();
                       }
 
 

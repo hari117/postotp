@@ -66,7 +66,7 @@ PageController pageController;
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.supervised_user_circle),
+                      Icon(Icons.supervised_user_circle,color: Colors.blue,),
                       SizedBox(height: 5,),
                       Text("Student"),
                     ],
@@ -95,7 +95,7 @@ PageController pageController;
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.ac_unit),
+                      Icon(Icons.verified_user,color: Colors.red,),
                       Text("Staff"),
                     ],
                   ),
@@ -113,7 +113,7 @@ PageController pageController;
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.ac_unit),
+                      Icon(Icons.supervised_user_circle,color: Colors.green,),
                       Text("Guest"),
                     ],
                   ),
@@ -151,7 +151,7 @@ PageController pageController;
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.ac_unit),
+                      Icon(Icons.supervised_user_circle_outlined,color: Colors.amber,),
                       Text("Patient"),
                     ],
                   ),

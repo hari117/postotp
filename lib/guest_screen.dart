@@ -72,7 +72,7 @@ class _GuestScreenState extends State<GuestScreen> {
                     height: 40,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
-                    onPressed: () {
+                    onPressed: () async{
 
                       if( nameController.text.isEmpty && reasonController.text.isEmpty)
                       {
@@ -85,7 +85,9 @@ class _GuestScreenState extends State<GuestScreen> {
                       }
                       else
                       {
-                        $apiServices.registerService(name: nameController.text,token: 2,reason: reasonController.text);
+                      await $apiServices.registerService(name: nameController.text,token: 2,reason: reasonController.text);
+                        nameController.clear();
+                        reasonController.clear();
                       }
 
 

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx/api_services.dart';
@@ -104,7 +105,7 @@ class _StudentScreenState extends State<StudentScreen> {
               height: 40,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5)),
-              onPressed: () {
+              onPressed: ()async {
                 if (srmIdController.text.isEmpty &&
                     nameController.text.isEmpty &&
                     departmentController.text.isEmpty) {
@@ -116,13 +117,16 @@ class _StudentScreenState extends State<StudentScreen> {
                     backgroundColor: Colors.white,
                   );
                 } else {
-                  $apiServices.registerService(
+               await   $apiServices.registerService(
                       // srmIdController.text, nameController.text,
                       // departmentController.text,0);
                       srmId: srmIdController.text,
                       name: nameController.text,
                       department: departmentController.text,
                       token: 0);
+                  srmIdController.clear();
+                  nameController.clear();
+                  departmentController.clear();
                 }
               },
               child: Text(

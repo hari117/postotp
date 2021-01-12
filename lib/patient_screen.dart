@@ -71,7 +71,7 @@ class _PatientSceenState extends State<PatientSceen> {
                   height: 40,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
-                  onPressed: () {
+                  onPressed: () async{
 
                     if( nameController.text.isEmpty && patientVisitReasonController.text.isEmpty)
                     {
@@ -84,7 +84,9 @@ class _PatientSceenState extends State<PatientSceen> {
                     }
                     else
                     {
-                      $apiServices.registerService(name: nameController.text,token: 2,reason: patientVisitReasonController.text);
+                     await $apiServices.registerService(name: nameController.text,token: 2,reason: patientVisitReasonController.text);
+                      nameController.clear();
+                      patientVisitReasonController.clear();
                     }
 
 
