@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:getx/api_services.dart';
 
 class StaffScreen extends StatefulWidget {
   @override
@@ -92,6 +94,25 @@ class _StaffScreenState extends State<StaffScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
                     onPressed: () {
+                      if(srmIdController.text.isEmpty && staffNameController.text.isEmpty && departmentController.text.isEmpty)
+                      {
+                        Get.snackbar(" Please Fill All Details", "",
+                          snackPosition: SnackPosition.BOTTOM,
+                          colorText: Colors.blue,
+                          backgroundColor: Colors.white,
+
+                        );
+                      }
+                      else
+                      {
+                        $apiServices.registerService(
+                          // srmIdController.text, nameController.text,
+                          // departmentController.text,0);
+                            srmId: srmIdController.text,
+                            name: staffNameController.text,
+                            department: departmentController.text,
+                            token: 1);
+                      }
 
 
 

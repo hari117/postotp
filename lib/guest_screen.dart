@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:getx/api_services.dart';
 
 class GuestScreen extends StatefulWidget {
   @override
@@ -72,6 +74,19 @@ class _GuestScreenState extends State<GuestScreen> {
                         borderRadius: BorderRadius.circular(5)),
                     onPressed: () {
 
+                      if( nameController.text.isEmpty && reasonController.text.isEmpty)
+                      {
+                        Get.snackbar(" Please Fill All Details", "",
+                          snackPosition: SnackPosition.BOTTOM,
+                          colorText: Colors.blue,
+                          backgroundColor: Colors.white,
+
+                        );
+                      }
+                      else
+                      {
+                        $apiServices.registerService(name: nameController.text,token: 2,reason: reasonController.text);
+                      }
 
 
                     },

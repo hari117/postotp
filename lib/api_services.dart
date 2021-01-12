@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx/dashboard_screen.dart';
+import 'package:getx/login_screen.dart';
 
 class ApiServices extends GetConnect {
   String url = "http://srm.vgts.tech/api/userotp";
@@ -20,20 +23,50 @@ class ApiServices extends GetConnect {
 
 
 
-  Future registerService(int srmId,String name,String department,) async {
-    Map<String, dynamic> registerMap ={
-      "srmid":srmId,
-      "name":name,
-      "role":2,
-      "department":department,
-      "phone":1234567890,
-      "notify_token":"jbkdfj",
-      "purposeofvisit":"kjbvjcbx"
-    };
+  Future registerService({String srmId,String name,String department,int token,String reason}) async {
+
+    Map<String, dynamic> registerMap ={};
+
+    if(token==0)
+      {
+         registerMap ={
+          "srmid":srmId,
+          "name":name,
+           "role":2,
+          "department":department,
+          "phone":phoneNumberController.text,
+           "notify_token":"jbkdfj",
+          //"purposeofvisit":"kjbvjcbx"
+        };
+      }else if(token==1)
+        {
+            registerMap ={
+              "srmid":srmId,
+              "name":name,
+               "role":2,
+              "department":department,
+              "phone":phoneNumberController.text,
+              // "notify_token":"jbkdfj",
+              //"purposeofvisit":"kjbvjcbx"
+            };
+
+        }else if(token==2)
+          {
+            print("enterted guest funtion ******");
+            registerMap ={
+              "name":name,
+               "role":3,
+              //"department":department,
+              "phone":phoneNumberController.text,
+               "notify_token":"jbkdfj",
+              "purposeofvisit":"kjbvjcbx"
+            };
+          }
     var data = await post("http://srm.vgts.tech/api/usercreate",registerMap);
-    var response=data.bodyString;
+    var response=await data.bodyString;
     print(response);
-    Get.snackbar("Hi",response.toString(),snackPosition: SnackPosition.BOTTOM);
+    Get.to(DashBoard(response));
+    //Get.snackbar("Hi",response.toString(),snackPosition: SnackPosition.BOTTOM);
   }
 
 

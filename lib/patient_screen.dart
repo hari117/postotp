@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:getx/api_services.dart';
 
 class PatientSceen extends StatefulWidget {
   @override
@@ -71,6 +73,19 @@ class _PatientSceenState extends State<PatientSceen> {
                       borderRadius: BorderRadius.circular(5)),
                   onPressed: () {
 
+                    if( nameController.text.isEmpty && patientVisitReasonController.text.isEmpty)
+                    {
+                      Get.snackbar(" Please Fill All Details", "",
+                        snackPosition: SnackPosition.BOTTOM,
+                        colorText: Colors.blue,
+                        backgroundColor: Colors.white,
+
+                      );
+                    }
+                    else
+                    {
+                      $apiServices.registerService(name: nameController.text,token: 2,reason: patientVisitReasonController.text);
+                    }
 
 
                   },

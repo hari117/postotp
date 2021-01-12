@@ -305,7 +305,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       t3.text.length == 1 && t4.text.length == 1 &&
                       t5.text.length == 1 && t6.text.length == 1 )
                     {
-                      Get.to(HomeScreen());
+                      Get.to(HomeScreen(widget.number));
                     }
                   else
                     {

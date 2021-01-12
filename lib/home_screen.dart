@@ -5,8 +5,11 @@ import 'package:getx/staff_screen.dart';
 import 'package:getx/student_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  String num;
   @override
   _HomeScreenState createState() => _HomeScreenState();
+
+  HomeScreen(this.num);
 }
 
 class _HomeScreenState extends State<HomeScreen> {

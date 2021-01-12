@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:getx/otp_screen.dart';
 
 import 'api_services.dart';
 
+TextEditingController phoneNumberController = TextEditingController();
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController phoneNumberController = TextEditingController();
+
+
+
 
   TextEditingController srmIdController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -67,7 +71,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (phoneNumberController.text.length == 10) {
                   $apiServices.requestOtpToLogin(phoneNumberController.text);
                   Get.to(OtpScreen(phoneNumberController.text));
-                  phoneController.clear();
+                 // instance.phoneNumber=phoneController.text;
+             //     print("${instance.phoneNumber} *********************************************}");
+                //  phoneController.clear();
                 }
                 else {
                   Get.snackbar("Enter 10 Digit valid Mobile Number", "",
